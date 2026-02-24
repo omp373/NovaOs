@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { LockScreen } from './components/LockScreen';
 import { HomeScreen } from './components/HomeScreen';
 import { StatusBar } from './components/StatusBar';
@@ -40,9 +40,10 @@ function GlobalNotifications() {
             initial={{ opacity: 0, y: -20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.9 }}
-            className={`pointer-events-auto w-full p-3 rounded-2xl shadow-2xl backdrop-blur-xl border ${
+            className={`pointer-events-auto w-full max-w-sm p-3 rounded-2xl shadow-2xl backdrop-blur-xl border ${
               n.type === 'warning' ? 'bg-orange-500/20 border-orange-500/50 text-orange-100' :
               n.type === 'success' ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-100' :
+              n.type === 'error' ? 'bg-red-500/20 border-red-500/50 text-red-100' :
               'bg-zinc-800/90 border-zinc-700 text-white'
             }`}
             onClick={() => removeNotification(n.id)}
@@ -57,8 +58,8 @@ function GlobalNotifications() {
 }
 
 function NovaOS() {
+  const { activeApp, setActiveApp } = useSystem();
   const [isLocked, setIsLocked] = useState(true);
-  const [activeApp, setActiveApp] = useState<string | null>(null);
   const [runningApps, setRunningApps] = useState<string[]>([]);
   const [showSwitcher, setShowSwitcher] = useState(false);
 
@@ -109,9 +110,9 @@ function NovaOS() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-4 sm:p-8 font-sans">
-      {/* Mobile Device Container */}
-      <div className="relative w-full max-w-[400px] h-[800px] max-h-[90vh] bg-black rounded-[2.5rem] overflow-hidden shadow-2xl border-[12px] border-zinc-900 flex flex-col ring-1 ring-white/10">
+    <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-0 sm:p-4 md:p-8 font-sans">
+      {/* Adaptive Device Container */}
+      <div className="relative w-full h-full sm:h-[800px] sm:max-w-[400px] sm:max-h-[90vh] bg-black sm:rounded-[2.5rem] overflow-hidden sm:shadow-2xl sm:border-[12px] border-zinc-900 flex flex-col sm:ring-1 sm:ring-white/10">
         
         <StatusBar />
 
