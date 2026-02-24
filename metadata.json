@@ -1,0 +1,5 @@
+{
+  "name": "NovaShell Prototype",
+  "description": "A web-based UI prototype of a lightweight ARM OS for Limbo Emulator, featuring a tile-based mobile interface.",
+  "requestFramePermissions": []
+}
